@@ -6,14 +6,14 @@ const displayDiv = document.querySelector('.display-div');
 const clearBtn = document.querySelector('.clear-btn');
 const numBtn = document.querySelectorAll('.num');
 const operatorBtn = document.querySelectorAll('.operator')
-
+const equalsBtn = document.querySelector('.equals');
 
 
 
 
 //operations
 
-const operationArr = []
+let operationArr = []
 
 function add (a, b){
     return a + b;
@@ -31,12 +31,13 @@ function divide(a, b){
     return a/b;
 }
 
-function operate (operator, a, b){
-    
-}
+
 
 function cls(){
-    displayDiv.innerText = ""
+    displayDiv.innerText = "";
+    firstValue = "";
+    secondValue = "";
+    operationArr = [];
 }
 
 // function display(number){
@@ -52,21 +53,67 @@ clearBtn.addEventListener('click', function(){
 
 displayDiv.innerText = ""
 
-numBtn.forEach(btn => {
-    btn.addEventListener('click', function(){ 
-        if(displayDiv.innerText.length <= 12){
-            displayDiv.innerText = displayDiv.innerText + btn.innerText;
+let firstValue = "";
+let secondValue = "";
+
+
+
+
+// numBtn.forEach(btn => {
+//     btn.addEventListener('click', function(){
+//        if(displayDiv.innerText.length <= 12){
+//            firstValue += btn.innerText; 
+//            displayDiv.innerText = firstValue;
+//        } else {
+//             alert('Screen has reached limit')
+//        }
+       
+//     })
+// });
+
+numBtn.forEach(btn =>{
+    btn.addEventListener('click', function(){
+        if(displayDiv.innerText.length <=12){
+        if(!(operationArr.includes('+') || operationArr.includes('-') || operationArr.includes('x') || operationArr.includes('/'))){
+            firstValue += btn.innerText;
+            displayDiv.innerText = firstValue;
         } else {
-            alert('screen has reached max input')
+            secondValue += btn.innerText
+            displayDiv.innerText = secondValue;
+        }
         }
     })
-});
+})
+
 
 
 operatorBtn.forEach(btn => {
     btn.addEventListener('click', function(e){
         operationArr.push(displayDiv.innerText)
         operationArr.push(e.target.innerText)
-        console.log(operationArr)
+        displayDiv.innerText = ""   
     } )
 })
+
+equalsBtn.addEventListener('click', function(){
+    operationArr.push(secondValue);
+    console.log(operationArr)
+    operate()
+})
+
+function operate(){
+    let result;
+    if(operationArr[1] = '+'){
+        result = add(parseInt(operationArr[0]), parseInt(operationArr[2]))
+        return (displayDiv.innerText = result)
+    } else if (operationArr[1] = '-'){
+        result = subtract(parseInt(operationArr[0])), parseInt(operationArr[2])
+        return (displayDiv.innerText = result)
+    } else if (operationArr[1] = 'x'){
+        result = multiply(parseInt(operationArr[0]), parseInt(operationArr[2]))
+        return (displayDiv.innerText = result)
+    } else if (operationArr[1] = '/'){
+        result = divide(parseInt(operationArr[0]), parseInt(operationArr[2]))
+        return (displayDiv.innerText = result)
+    }
+}
