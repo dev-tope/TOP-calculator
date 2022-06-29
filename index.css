@@ -1,0 +1,104 @@
+html, body{
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    /* background-image: url('pexels-markus-spiske-1089438.jpg'); */
+    /* background-size: cover; */
+}
+
+.main-container{
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.calc-div {
+    width: 30%;
+    height: 75%;
+    border: 2px solid #899499;
+    box-shadow: 5px 3px #899499;
+    border-radius: 10px 10px 40px 40px;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    background-color: #D3D3D3;
+}
+
+.screen-div {
+    width: 95%;
+    height: 20%;
+    margin-top: 2.5%;
+    border: 2px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #ADD8E6;
+
+}
+
+.display-div {
+    width: 95%;
+    height: 80%;
+    /* border: 1px solid red; */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    font-family: fantasy;
+    font-size: 4vw;
+    color: #4169E1;
+}
+
+.num-display {
+    height: 100%;
+    font-size: 30px;
+    border: 1px solid blue;
+}
+
+.btn-div {
+    width: 95%;
+    height: 70%;
+    margin-top: 5%;
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.btn{
+    border: 2px solid #36454F;
+    box-shadow: 2px 2px #818589;
+    border-radius: 10px;
+    width: 20%;
+    height: 20%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #7393B3;
+    color: white;
+
+}
+
+.btn p {
+    font-size: 4vw;
+    font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
+}
+
+.clear-btn {
+    background-color: #FF8C00;
+}
+
+.operator {
+    background-color: #FF8C00;
+}
