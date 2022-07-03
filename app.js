@@ -20,7 +20,7 @@ function add (a, b){
 }
 
 function subtract(a, b){
-    return a-b;
+    return a - b;
 }
 
 function multiply(a, b){
@@ -31,7 +31,9 @@ function divide(a, b){
     return a/b;
 }
 
-
+function display(value){
+    displayDiv.innerText = value;
+}
 
 function cls(){
     displayDiv.innerText = "";
@@ -40,9 +42,22 @@ function cls(){
     operationArr = [];
 }
 
-// function display(number){
-//     let number = num.innerText
-// }
+function clearArr(array){
+    for (let i = 0; i <= array.length + 1; i++){
+        operationArr.pop();
+    }
+}
+
+function equalsFn(){
+    operationArr.push(secondValue);
+    operate();
+    clearArr(operationArr);
+    operationArr.push(result);
+    secondValue = "";
+    firstValue = result;
+    console.log(operationArr)
+}
+
 
 
 //events
@@ -74,12 +89,15 @@ let secondValue = "";
 numBtn.forEach(btn =>{
     btn.addEventListener('click', function(){
         if(displayDiv.innerText.length <=12){
-        if(!(operationArr.includes('+') || operationArr.includes('-') || operationArr.includes('x') || operationArr.includes('/'))){
+        if((operationArr.length === 0 && (!(operationArr.includes('+') || operationArr.includes('-') || operationArr.includes('x') || operationArr.includes('/'))))){
             firstValue += btn.innerText;
-            displayDiv.innerText = firstValue;
+            display(firstValue);
+        } else if (operationArr.length === 1){
+            firstValue = operationArr[0].toString()
+            firstValue += btn.innerText;
         } else {
             secondValue += btn.innerText
-            displayDiv.innerText = secondValue;
+            display(secondValue);
         }
         }
     })
@@ -89,31 +107,49 @@ numBtn.forEach(btn =>{
 
 operatorBtn.forEach(btn => {
     btn.addEventListener('click', function(e){
-        operationArr.push(displayDiv.innerText)
-        operationArr.push(e.target.innerText)
-        displayDiv.innerText = ""   
-    } )
+        //checks if operationArr is empty
+        if(typeof operationArr[0] === 'undefined'){
+            operationArr.push(firstValue)
+            console.log(operationArr)
+            operationArr.push(e.target.innerText)
+            displayDiv.innerText = ""      
+        } else if (operationArr.length >= 1){
+            equalsFn()
+            operationArr.push(e.target.innerText)
+        }else {
+            operationArr.push(e.target.innerText)
+            displayDiv.innerText = "";    
+        }
+    })
 })
 
 equalsBtn.addEventListener('click', function(){
-    operationArr.push(secondValue);
-    console.log(operationArr)
-    operate()
+    if (operationArr.length === 0){
+        return operationArr;
+    } else {
+        equalsFn()
+    }
 })
 
+let result;
 function operate(){
-    let result;
-    if(operationArr[1] = '+'){
-        result = add(parseInt(operationArr[0]), parseInt(operationArr[2]))
-        return (displayDiv.innerText = result)
-    } else if (operationArr[1] = '-'){
-        result = subtract(parseInt(operationArr[0])), parseInt(operationArr[2])
-        return (displayDiv.innerText = result)
-    } else if (operationArr[1] = 'x'){
-        result = multiply(parseInt(operationArr[0]), parseInt(operationArr[2]))
-        return (displayDiv.innerText = result)
-    } else if (operationArr[1] = '/'){
-        result = divide(parseInt(operationArr[0]), parseInt(operationArr[2]))
-        return (displayDiv.innerText = result)
+    switch (operationArr[1]){
+        case '+':
+            result = add(parseInt(operationArr[0]), parseInt(operationArr[2]))
+            return (display(result))
+            break;
+        case  '-':
+            result = subtract(parseInt(operationArr[0]), parseInt(operationArr[2]));
+            return (display(result))
+            break;
+        case 'x':
+            result = multiply(parseInt(operationArr[0]), parseInt(operationArr[2]))
+            return (display(result))
+            break;
+        case '/':
+            result = divide(parseInt(operationArr[0]), parseInt(operationArr[2]))
+            return (display(result))
+            break;
     }
+    
 }
